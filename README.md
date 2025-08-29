@@ -157,9 +157,90 @@ If Maven is not installed, you can download it from: https://maven.apache.org/do
 4. Update the controller with new endpoints
 5. Modify the HTML template and add JavaScript if needed
 
+## Testing
+
 ### Running Tests
+
+#### Unit Tests
 ```bash
 mvn test
+```
+
+#### Integration Tests
+```bash
+mvn verify
+```
+
+#### All Tests with Coverage
+```bash
+mvn clean test jacoco:report
+```
+
+#### Code Quality Checks
+```bash
+# Run SpotBugs (bug detection)
+mvn spotbugs:check
+
+# Run Checkstyle (code style)
+mvn checkstyle:check
+
+# Run PMD (code analysis)
+mvn pmd:check
+```
+
+### Test Coverage
+- **Unit Tests**: Test individual components in isolation
+- **Integration Tests**: Test component interactions
+- **Web Layer Tests**: Test HTTP endpoints and responses
+- **Validation Tests**: Test data validation rules
+
+### Test Structure
+```
+src/test/java/com/taskmanager/
+├── TaskManagerApplicationTests.java     # Application context tests
+├── model/
+│   └── TaskTest.java                    # Entity validation tests
+├── service/
+│   └── TaskServiceTest.java             # Business logic tests
+└── controller/
+    └── TaskControllerIntegrationTest.java # Web layer tests
+```
+
+## CI/CD Pipeline
+
+This project includes a comprehensive GitHub Actions CI/CD pipeline that runs on:
+
+- ✅ **Every push** to any branch
+- ✅ **Every pull request** to main/develop
+- ✅ **Manual triggers** via workflow_dispatch
+
+### Pipeline Stages
+
+1. **🧪 Tests** - Runs unit and integration tests on Java 17 & 21
+2. **🏗️ Build** - Compiles and packages the application
+3. **🔒 Security Scan** - OWASP dependency vulnerability check
+4. **📊 Code Quality** - SpotBugs, Checkstyle, PMD analysis
+5. **🐳 Docker Build** - Creates container image (main branch only)
+6. **📢 Notifications** - Reports pipeline results
+
+### Pipeline Features
+
+- **Matrix Testing**: Tests on multiple Java versions
+- **Caching**: Maven dependencies cached for faster builds
+- **Artifacts**: Test reports and build artifacts preserved
+- **Parallel Execution**: Jobs run in parallel where possible
+- **Conditional Steps**: Docker build only on main branch
+
+### Local Development
+
+To run the same checks locally:
+
+```bash
+# Full pipeline simulation
+mvn clean verify spotbugs:check checkstyle:check pmd:check
+
+# With test coverage
+mvn clean test jacoco:report
 ```
 
 ## License
