@@ -1,0 +1,211 @@
+/* Custom styles for Task Manager */
+
+body {
+    background-color: #f8f9fa;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.container-fluid {
+    padding: 0;
+}
+
+/* Header styling */
+header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+/* Card styling */
+.card {
+    border: none;
+    border-radius: 12px;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.card-header {
+    border-radius: 12px 12px 0 0 !important;
+    border-bottom: none;
+    font-weight: 600;
+}
+
+/* Task item styling */
+.task-item {
+    background: white;
+    border: 1px solid #e9ecef !important;
+    border-radius: 8px;
+    transition: all 0.2s ease-in-out;
+}
+
+.task-item:hover {
+    border-color: #007bff !important;
+    box-shadow: 0 4px 15px rgba(0,123,255,0.1);
+    transform: translateY(-1px);
+}
+
+/* Badge styling */
+.badge {
+    font-size: 0.75rem;
+    padding: 0.5em 0.75em;
+    border-radius: 6px;
+}
+
+/* Button styling */
+.btn {
+    border-radius: 6px;
+    font-weight: 500;
+    transition: all 0.2s ease-in-out;
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+}
+
+.btn-group .btn {
+    border-radius: 6px;
+}
+
+/* Form styling */
+.form-control, .form-select {
+    border-radius: 6px;
+    border: 1px solid #ced4da;
+    transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.2rem rgba(0,123,255,0.25);
+}
+
+/* Alert styling */
+.alert {
+    border-radius: 8px;
+    border: none;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* Modal styling */
+.modal-content {
+    border-radius: 12px;
+    border: none;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.modal-header {
+    border-bottom: 1px solid #e9ecef;
+    border-radius: 12px 12px 0 0;
+}
+
+.modal-footer {
+    border-top: 1px solid #e9ecef;
+    border-radius: 0 0 12px 12px;
+}
+
+/* Dropdown styling */
+.dropdown-menu {
+    border-radius: 8px;
+    border: none;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.dropdown-item:hover {
+    background-color: #f8f9fa;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .task-item .row {
+        flex-direction: column;
+    }
+    
+    .task-item .col-md-3 {
+        margin-top: 1rem;
+        text-align: left !important;
+    }
+    
+    .btn-group {
+        width: 100%;
+    }
+    
+    .btn-group .btn {
+        flex: 1;
+    }
+}
+
+/* Animation for task items */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.task-item {
+    animation: fadeInUp 0.3s ease-out;
+}
+
+/* Priority color indicators */
+.task-item[data-priority="URGENT"] {
+    border-left: 4px solid #dc3545;
+}
+
+.task-item[data-priority="HIGH"] {
+    border-left: 4px solid #fd7e14;
+}
+
+.task-item[data-priority="MEDIUM"] {
+    border-left: 4px solid #007bff;
+}
+
+.task-item[data-priority="LOW"] {
+    border-left: 4px solid #6c757d;
+}
+
+/* Status color indicators */
+.task-item[data-status="COMPLETED"] {
+    background-color: #f8fff9;
+    border-color: #28a745 !important;
+}
+
+.task-item[data-status="IN_PROGRESS"] {
+    background-color: #fffbf0;
+    border-color: #ffc107 !important;
+}
+
+.task-item[data-status="CANCELLED"] {
+    background-color: #f8f9fa;
+    opacity: 0.7;
+}
+
+/* Loading spinner */
+.spinner-border-sm {
+    width: 1rem;
+    height: 1rem;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}
