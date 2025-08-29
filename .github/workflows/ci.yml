@@ -109,6 +109,11 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
         
+    - name: Set JAVA_HOME for OWASP
+      run: |
+        echo "JAVA_HOME=$JAVA_HOME" >> $GITHUB_ENV
+        echo "JAVA_HOME is set to: $JAVA_HOME"
+        
     - name: Run OWASP Dependency Check
       uses: dependency-check/Dependency-Check_Action@main
       with:
@@ -116,6 +121,7 @@ jobs:
         path: '.'
         format: 'HTML'
         out: 'reports'
+        args: '--noupdate'
         
     - name: Upload security report
       uses: actions/upload-artifact@v4
@@ -167,13 +173,18 @@ jobs:
         docker build -t task-manager:${{ github.sha }} .
         docker tag task-manager:${{ github.sha }} task-manager:latest
         
+    - name: Save Docker image
+      run: |
+        docker save task-manager:${{ github.sha }} | gzip > task-manager-${{ github.sha }}.tar.gz
+        docker save task-manager:latest | gzip > task-manager-latest.tar.gz
+        
     - name: Upload Docker image
       uses: actions/upload-artifact@v4
       with:
-        name: docker-image
+        name: docker-images
         path: |
-          task-manager:${{ github.sha }}
-          task-manager:latest
+          task-manager-${{ github.sha }}.tar.gz
+          task-manager-latest.tar.gz
         retention-days: 30
 
   notify:
